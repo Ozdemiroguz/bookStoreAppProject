@@ -12,10 +12,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 @RoutePage()
 //statefull widget
 class BookPage extends HookConsumerWidget {
-final Book book;
+  final Book book;
 
-const BookPage({required this.book});
-
+  const BookPage({required this.book});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,9 +24,10 @@ const BookPage({required this.book});
           Text(
             "BookDetails",
             style: labelLarge.copyWith(
-                color: Colors.black,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,),
+              color: Colors.black,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -45,27 +45,21 @@ const BookPage({required this.book});
               children: [
                 ImagePart(book: book),
                 SummaryPart(book: book),
-                                const Spacer(),
-
-                ButtonPart(book:  book,),
-
-
-               
+                const Spacer(),
+                ButtonPart(
+                  book: book,
+                ),
               ],
             ),
             Positioned(
               right: 0,
               child: GestureDetector(
-                onTap: () {
-
-                },
+                onTap: () {},
                 child: Icon(
-
                   Icons.favorite_border,
-                  color:purple,
+                  color: purple,
                   size: 30.r,
                 ),
-
               ),
             ),
           ],
@@ -84,57 +78,57 @@ class ImagePart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-                        Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: 150.r,
-                      height: 225.r,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
-                            offset: const Offset(0, 3), // changes position of shadow
-                          ),
-                        ],
-                        image:  DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                            book.image!,
-                          
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 150.r,
+              height: 225.r,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                    offset: const Offset(0, 1), // changes position of shadow
+                  ),
+                ],
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                    book.image!,
+                  ),
                 ),
-                Column(
-                  children: [
-                    Text(
-                      book.name,
-                      style: titleLarge.copyWith(
-                          color: Colors.black,
-                          height: 2.7.w,
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,),
-                    ),
-                    Text(book.author,
-                        style: bodyMedium.copyWith(
-                            color: Colors.grey,
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,),),
-                  ],
-                ),
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            Text(
+              book.name,
+              style: titleLarge.copyWith(
+                color: Colors.black,
+                height: 2.7.w,
+                fontSize: 20.sp,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            Text(
+              book.author,
+              style: bodyMedium.copyWith(
+                color: Colors.grey,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
 }
-
-
-  
 
 class SummaryPart extends StatelessWidget {
   final Book book;
@@ -144,72 +138,71 @@ class SummaryPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-                  padding: EdgeInsets.only(top: 20.r),
-                  width: context.screenWidth,
-
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Sumary',
-                        style: titleLarge.copyWith(
-                            color: Colors.black,
-                            height: 2.7.w,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w700,),
-                      ),
-                     SizedBox(
-                      height: context.screenHeight * 0.25,
-                          child: SingleChildScrollView(
-                            child: Text(
-                                style: labelSmall.copyWith(
-                                    color: Colors.grey,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,),
-                                 book.description,),
-                          ),
-                        ),
-                      
-                    ],
-                  ),
-                );
+      padding: EdgeInsets.only(top: 20.r),
+      width: context.screenWidth,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Sumary',
+            style: titleLarge.copyWith(
+              color: Colors.black,
+              height: 2.7.w,
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          SizedBox(
+            height: context.screenHeight * 0.25,
+            child: SingleChildScrollView(
+              child: Text(
+                style: labelSmall.copyWith(
+                  color: Colors.grey,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                book.description,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
-class ButtonPart extends StatelessWidget
-{
+class ButtonPart extends StatelessWidget {
   final Book book;
 
   const ButtonPart({required this.book});
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
-                  height: 60,
-                  child: CustomFilledButton.orange(
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "${book.price}\$",
-                            style: labelMedium.copyWith(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,),
-                          ),
-                          Text(
-                            "Buy Now",
-                            style: labelMedium.copyWith(
-                                color: Colors.white,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.bold,),
-                          ),
-                        ],
-                      ),),
-                );
-
-    
+    return SizedBox(
+      height: 60,
+      child: CustomFilledButton.orange(
+        onPressed: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              "${book.price}\$",
+              style: labelMedium.copyWith(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              "Buy Now",
+              style: labelMedium.copyWith(
+                color: Colors.white,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
-
-  
 }
