@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+
+import sys, os, re
+from subprocess import check_output
+
+# Collect the parameters
+commit_msg_filepath = sys.argv[1]
+
+# Hangi branch'teyiz ve kim gonderigoyr
+# ( Acaba --global yerine --local mi bakilmali, simdilik author_mail kullanilmadigi icin onemsiz)
+branch = check_output(['git', 'symbolic-ref', '--short', 'HEAD']).strip()
+author_mail = check_output(['git', 'config', '--global', '--get', 'user.name']).strip()
+
+#print("commit-msg: On branch '%s'" % branch)
+branch=branch.decode("utf-8")
+#print(branch)
+# Check the commit message if we're on an feature branch
+if branch.startswith('#'):
+    #print( "commit-msg: Oh hey, it's prob. feature branch. %s" % branch)
+    result = branch.split('-') 
+    issue_number = result[0]
+   
+    required_message = "%s" % issue_number
+    #print(required_message)
+    with open(commit_msg_filepath, 'r') as f:
+        content = f.read()
+        #print(content)
+        result = content.strip().split(' ')
+        issue_number = result[0]
+        print(issue_number)
+        if not issue_number[1:].isnumeric():
+            print("commit-msg: ERROR Code:1! Commit mesajiniz #{issue-id} ile baslamadigi icin bu branche push yapamazsiniz. \nAyrintili Bilgi Icin: https://pikipedia.piton.com.tr/books/yazilim-gelistirme-surecleri/page/git-branch-olusturma-stratejileri ")
+            sys.exit(1)
+        elif not content.startswith(str(required_message)):
+            print ("commit-msg: ERROR Code:2! Commit mesaji ile branch tutmuyor '%s'" % required_message)
+            sys.exit(1)
+elif branch.startswith('hotfix-'):
+    #print("hotfix branch")
+    with open(commit_msg_filepath, 'r') as f:
+        content = f.read()
+        #print(content)
+        result = content.strip().split(' ')
+        hotfix = result[0]        
+        if not branch.startswith(str(hotfix)):
+            print ("commit-msg: ERROR Code:6! Hotfix branchi ile mesaj uygun degil \nAyrintili Bilgi Icin: https://pikipedia.piton.com.tr/books/yazilim-gelistirme-surecleri/page/git-branch-olusturma-stratejileri ")
+            sys.exit(1)
+elif branch.startswith('relase-'):
+        print ("commit-msg: ERROR Code:7! release branch'ine merge harici islem yapilamaz \nAyrintili Bilgi Icin: https://pikipedia.piton.com.tr/books/yazilim-gelistirme-surecleri/page/git-branch-olusturma-stratejileri ")
+        sys.exit(1)
+elif branch.startswith('master'):
+    print("commit-msg: ERROR Code:4! Bu branche yalnizca hotfix veya release branch merge ile yazilabilir. \nAyrintili Bilgi Icin: https://pikipedia.piton.com.tr/books/yazilim-gelistirme-surecleri/page/git-branch-olusturma-stratejileri ")
+    sys.exit(1)
+elif branch.startswith('development'):
+    print("commit-msg: ERROR Code:5! Bu branche yalnizca hotfix veya #issueID-branch-aciklama branch merge ile yazilabilir. \nAyrintili Bilgi Icin: https://pikipedia.piton.com.tr/books/yazilim-gelistirme-surecleri/page/git-branch-olusturma-stratejileri ")
+    sys.exit(1)
+else:
+    print("commit-msg: ERROR Code:3! Piton kalite standartlarinda bir branch olmadigi icin buraya commit yapamazsiniz. \nAyrintili Bilgi Icin: https://pikipedia.piton.com.tr/books/yazilim-gelistirme-surecleri/page/git-branch-olusturma-stratejileri ")
+    sys.exit(1)
