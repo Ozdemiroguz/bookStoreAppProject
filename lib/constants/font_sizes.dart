@@ -1,10 +1,12 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-const kFontFamily = "Inter";
+const kFontFamily = "Manrope";
 
 const kLineHeight1_0 = 1.0;
+const kLineHeight1_16 = 1.16;
 const kLineHeight1_21 = 1.21;
 const kLineHeight1_416 = 1.416;
+const kLineHeight1_27 = 1.27;
 
 final fontSize10 = 10.sp;
 final fontSize12 = 12.sp;

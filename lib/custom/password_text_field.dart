@@ -25,6 +25,8 @@ class PasswordTextField extends HookWidget {
   final Widget? prefixIcon;
   final String? hintText;
   final String? labelText;
+  final bool? obscureText;
+  final String? obscuringCharacter;
   final bool? isNewPassword;
 
   const PasswordTextField({
@@ -40,6 +42,8 @@ class PasswordTextField extends HookWidget {
     this.onSaved,
     this.hintText,
     this.labelText,
+    this.obscureText,
+    this.obscuringCharacter,
     this.autovalidateMode,
     this.isDisabled = false,
     this.isNewPassword = false,
@@ -55,7 +59,9 @@ class PasswordTextField extends HookWidget {
       onFieldSubmitted: onFieldSubmitted,
       onEditingComplete: onEditingComplete,
       textInputType: textInputType,
-      inputFormatters: isNewPassword! ? newPasswordInputFormatters() : passwordInputFormatters(),
+      inputFormatters: isNewPassword!
+          ? newPasswordInputFormatters()
+          : passwordInputFormatters(),
       controller: controller,
       focusNode: focusNode,
       onChanged: onChanged,

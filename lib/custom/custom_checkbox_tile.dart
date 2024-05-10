@@ -7,12 +7,16 @@ class CustomCheckboxTile extends StatelessWidget {
     required this.value,
     required this.onChanged,
     this.labelColor,
+    this.checkedColor,
+    this.labelStyle,
   });
 
   final String label;
   final Color? labelColor;
+  final Color? checkedColor;
   final bool value;
   final ValueChanged<bool?> onChanged;
+  final TextStyle? labelStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +28,7 @@ class CustomCheckboxTile extends StatelessWidget {
             maxHeight: 16.h,
             maxWidth: 16.w,
             child: Checkbox(
-              activeColor: Theme.of(context).primaryColor,
+              activeColor: checkedColor,
               onChanged: onChanged,
               value: value,
             ),
@@ -33,9 +37,7 @@ class CustomCheckboxTile extends StatelessWidget {
           Expanded(
             child: Text(
               label,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: labelColor,
-                  ),
+              style: labelStyle,
             ),
           ),
         ],

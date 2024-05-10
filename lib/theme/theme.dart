@@ -43,7 +43,7 @@ final theme = ThemeData(
 
 final _filledButtomThemeData = FilledButtonThemeData(
   style: ButtonStyle(
-    minimumSize: MaterialStatePropertyAll(Size.fromHeight(54.r)),
+    minimumSize: MaterialStatePropertyAll(Size.fromHeight(60.r)),
     backgroundColor: MaterialStateProperty.resolveWith<Color>(
       (states) {
         if (states.contains(MaterialState.disabled)) {
@@ -54,7 +54,8 @@ final _filledButtomThemeData = FilledButtonThemeData(
       },
     ),
     side: const MaterialStatePropertyAll(BorderSide.none),
-    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+    padding: MaterialStatePropertyAll(
+        EdgeInsets.only(top: 10.r, bottom: 10.r, left: 20.r, right: 20.r)),
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.r)),
     ),
@@ -103,27 +104,27 @@ const _cupertinoThemeData = CupertinoThemeData(
 
 final _inputDecorationTheme = InputDecorationTheme(
   filled: true,
-  fillColor: bgColor,
+  fillColor: softBack,
   iconColor: darkBlue,
-  suffixIconColor: darkBlue,
+  suffixIconColor: darkBlue3,
   prefixIconColor: darkBlue,
-  hintStyle: labelLarge.copyWith(color: darkBlue.withOpacity(.4)),
-  labelStyle: labelLarge.copyWith(color: darkBlue),
+  hintStyle: labelLarge.copyWith(color: darkBlue3.withOpacity(.4)),
+  labelStyle: labelLarge.copyWith(color: darkBlue3),
   errorStyle: bodySmall.copyWith(color: red),
   errorMaxLines: 2,
   contentPadding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 16.h),
   floatingLabelStyle: bodySmall.copyWith(color: darkBlue),
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6.r),
-    borderSide: BorderSide(color: ligthBlue, width: 1.r),
+    borderSide: BorderSide.none,
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6.r),
-    borderSide: BorderSide(color: primary, width: 1.r),
+    borderSide: BorderSide.none,
   ),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6.r),
-    borderSide: BorderSide(color: ligthBlue, width: 1.r),
+    borderSide: BorderSide.none,
   ),
   disabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6.r),
@@ -131,11 +132,11 @@ final _inputDecorationTheme = InputDecorationTheme(
   ),
   errorBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6.r),
-    borderSide: BorderSide(color: red, width: 1.r),
+    borderSide: BorderSide.none,
   ),
   focusedErrorBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(6.r),
-    borderSide: BorderSide(color: red, width: 1.r),
+    borderSide: BorderSide.none,
   ),
 );
 
@@ -146,7 +147,8 @@ final _textButtonThemeData = TextButtonThemeData(
     backgroundColor: const MaterialStatePropertyAll(Colors.transparent),
     overlayColor: const MaterialStatePropertyAll(Colors.transparent),
     padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-    textStyle: MaterialStatePropertyAll(titleMedium.copyWith(fontSize: fontSize14)),
+    textStyle:
+        MaterialStatePropertyAll(titleMedium.copyWith(fontSize: fontSize14)),
   ),
 );
 
@@ -194,7 +196,7 @@ final _listTileThemeData = ListTileThemeData(
   textColor: textColor,
   tileColor: bgColor,
   horizontalTitleGap: 0,
-  iconColor: primary,
+  iconColor: purple,
 );
 
 final _checkboxThemeData = CheckboxThemeData(
@@ -202,9 +204,9 @@ final _checkboxThemeData = CheckboxThemeData(
   checkColor: const MaterialStatePropertyAll(white),
   shape: RoundedRectangleBorder(
     side: BorderSide(color: primary, width: 1.r),
-    borderRadius: BorderRadius.circular(4.r),
+    borderRadius: BorderRadius.circular(2.r),
   ),
-  side: BorderSide(color: darkBlue.withOpacity(.2), width: 1.r),
+  side: BorderSide(color: purple, width: 2.r),
   fillColor: MaterialStateProperty.resolveWith((states) {
     if (states.contains(MaterialState.selected)) return primary;
     return null;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
 
-enum _Type { orange,gray }
+enum _Type { gray }
 
 abstract final class CustomFilledButton extends StatelessWidget {
   final void Function()? onPressed;

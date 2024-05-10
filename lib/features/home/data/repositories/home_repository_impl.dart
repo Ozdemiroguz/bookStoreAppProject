@@ -1,4 +1,3 @@
-
 import 'package:book_store/constants/api_endpoints.dart';
 import 'package:book_store/features/home/data/repositories/DTOs/bookDto/book_dto.dart';
 import 'package:book_store/features/home/data/repositories/DTOs/bookcategoryDto/bookcategory_dto.dart';
@@ -24,15 +23,20 @@ final class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, List<BookCategory>>> getCategories() async {
     final response = await _networkService.get(Endpoints.categories);
 
-     return response.fold(
+    return response.fold(
       (l) => left(Failure.unknownError(l.message)),
       (r) => r.data!.extract<List>('category').fold(
-            () => left(const Failure.unknownError("Error extracting categories")),
-            (categories) =>
-                right(categories.map((category) => BookCategoryDto.fromJson(category as Map<String, dynamic>).toDomain()).toList()),
+            () =>
+                left(const Failure.unknownError("Error extracting categories")),
+            (categories) => right(categories
+                .map(
+                  (category) =>
+                      BookCategoryDto.fromJson(category as Map<String, dynamic>)
+                          .toDomain(),
+                )
+                .toList()),
           ),
     );
-  
   }
 
   @override
@@ -44,28 +48,36 @@ final class HomeRepositoryImpl implements HomeRepository {
       (l) => left(Failure.unknownError(l.message)),
       (r) => r.data!.extract<List>('product').fold(
             () => left(const Failure.unknownError("Error extracting lobbies")),
-            (books) => right(books
-                .map((book) =>
-                    BookDto.fromJson(book as Map<String, dynamic>).toDomain(),)
-                .toList(),),
+            (books) => right(
+              books
+                  .map(
+                    (book) => BookDto.fromJson(book as Map<String, dynamic>)
+                        .toDomain(),
+                  )
+                  .toList(),
+            ),
           ),
     );
-
   }
+
   @override
-  Future<Either<Failure,String>> getBookImage( String bookImageName) async {
-    final response = await _networkService.post(Endpoints.bookImage,data: {
-      'fileName':bookImageName,
-    });
-return response.fold(
-  (l) => left(Failure.unknownError(l.message)),
-  (r) => r.data!.extract<Map<String, dynamic>>('action_product_image').fold(
-    () => left(const Failure.unknownError("Error extracting product image")),
-    (map) => map['url'] == null 
-      ? left(const Failure.unknownError("URL not found in product image data")) 
-      : right(map['url'].toString()),
-  ),
-);
+  Future<Either<Failure, String>> getBookImage(String bookImageName) async {
+    final response = await _networkService.post(
+      Endpoints.bookImage,
+      data: {
+        'fileName': bookImageName,
+      },
+    );
+    return response.fold(
+      (l) => left(Failure.unknownError(l.message)),
+      (r) => r.data!.extract<Map<String, dynamic>>('action_product_image').fold(
+            () => left(
+                const Failure.unknownError("Error extracting product image")),
+            (map) => map['url'] == null
+                ? left(const Failure.unknownError(
+                    "URL not found in product image data"))
+                : right(map['url'].toString()),
+          ),
+    );
   }
-
 }

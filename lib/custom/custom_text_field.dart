@@ -1,3 +1,4 @@
+import 'package:book_store/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -19,7 +20,6 @@ class CustomTextField extends HookWidget {
   final TextInputType? textInputType;
   final Widget? errorWidget;
 
-  final TextStyle? style;
   final TextStyle? labelStyle;
   final TextStyle? hintStyle;
   final FocusNode? focusNode;
@@ -72,7 +72,6 @@ class CustomTextField extends HookWidget {
     this.enabled = true,
     this.expands = false,
     this.readOnly = false,
-    this.style,
     this.fillColor,
     this.border,
     this.enabledBorder,
@@ -93,7 +92,7 @@ class CustomTextField extends HookWidget {
     return TextFormField(
       key: formFieldKey,
       initialValue: initialValue,
-      style: style ?? Theme.of(context).textTheme.labelLarge?.copyWith(color: darkBlue, fontWeight: FontWeight.w300),
+      style: textFieldStyle,
       onFieldSubmitted: onFieldSubmitted,
       onEditingComplete: onEditingComplete,
       inputFormatters: inputFormatters,
@@ -116,6 +115,7 @@ class CustomTextField extends HookWidget {
         suffixIconConstraints: suffixIconConstraints,
         prefixIconConstraints: prefixIconConstraints,
         suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
         enabled: enabled,
         contentPadding: contentPadding,
         // fillColor: !enabled ? gray.withOpacity(0.4) : fillColor,

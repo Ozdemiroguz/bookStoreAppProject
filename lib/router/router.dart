@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:book_store/features/home/domain/models/book_category.dart';
 
 import '../features/auth/presentation/pages/login_page.dart';
 import '../features/auth/presentation/pages/register_page.dart';
+import '../features/home/domain/models/book.dart';
 import '../features/home/presentation/pages/book_page.dart';
 import '../features/home/presentation/pages/category_page.dart';
 import '../features/home/presentation/pages/home_page.dart';
 import '../features/intro/presentation/pages/intro_page.dart';
-import '../features/home/domain/models/book_category.dart';
-import '../features/home/domain/models/book.dart';
 
 import '../splash_page.dart';
 
@@ -32,7 +32,5 @@ class AppRouter extends _$AppRouter {
         AutoRoute(page: HomeRoute.page),
         AutoRoute(page: CategoryRoute.page),
         AutoRoute(page: BookRoute.page),
-
-        
       ];
 }

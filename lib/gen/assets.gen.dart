@@ -29,6 +29,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Failure.svg
   SvgGenImage get failure => const SvgGenImage('assets/icons/Failure.svg');
 
+  /// File path: assets/icons/Filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/icons/Filter.svg');
+
   /// File path: assets/icons/Logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/Logo.svg');
 
@@ -38,6 +41,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/PitonLogoWhite.svg
   SvgGenImage get pitonLogoWhite =>
       const SvgGenImage('assets/icons/PitonLogoWhite.svg');
+
+  /// File path: assets/icons/Search.svg
+  SvgGenImage get search => const SvgGenImage('assets/icons/Search.svg');
 
   /// File path: assets/icons/Success.svg
   SvgGenImage get success => const SvgGenImage('assets/icons/Success.svg');
@@ -52,9 +58,11 @@ class $AssetsIconsGen {
         eyeOff,
         eyeOn,
         failure,
+        filter,
         logo,
         pitonLogo,
         pitonLogoWhite,
+        search,
         success,
         arrowDown
       ];

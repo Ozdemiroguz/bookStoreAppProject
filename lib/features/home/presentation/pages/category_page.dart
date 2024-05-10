@@ -33,8 +33,10 @@ class CategoryPage extends HookConsumerWidget {
                       : //if selectedCategoryId is -1, show 'All Books' else show the name of the category that has the id of selectedCategoryId in
 
                       booksState.bookCategories
-                          .firstWhere((element) =>
-                              element.id == booksState.selectedCategoryId)
+                          .firstWhere(
+                            (element) =>
+                                element.id == booksState.selectedCategoryId,
+                          )
                           .name,
                   style: labelLarge.copyWith(
                     color: Colors.black,
@@ -105,8 +107,9 @@ class GridWidget extends ConsumerWidget {
                 ),
                 itemBuilder: (BuildContext context, int index) {
                   return BookWidget(
-                      book: booksState.filteredBooks[
-                          booksState.selectedCategoryId]![index]);
+                    book: booksState
+                        .filteredBooks[booksState.selectedCategoryId]![index],
+                  );
                 },
               );
   }
@@ -128,7 +131,6 @@ class BookWidget extends StatelessWidget {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.network(
               book.image!,
@@ -167,7 +169,7 @@ class BookWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        book.price.toString() + "\$",
+                        "${book.price}\$",
                         style: TextStyle(
                           color: const Color(0xFF6251DD),
                           fontSize: 12.sp,

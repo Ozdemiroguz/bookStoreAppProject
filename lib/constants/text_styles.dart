@@ -122,3 +122,35 @@ final displayLarge = TextStyle(
   height: kLineHeight1_416,
   color: darkBlue,
 );
+
+final bLabelSmall = TextStyle(
+  fontWeight: FontWeight.w600,
+  fontFamily: kFontFamily,
+  fontSize: fontSize12,
+  height: kLineHeight1_16,
+  color: darkBlue3,
+);
+
+final bLabelMedium = TextStyle(
+  fontWeight: FontWeight.w600,
+  fontFamily: kFontFamily,
+  fontSize: fontSize16,
+  height: kLineHeight1_21,
+  color: darkBlue3,
+);
+
+final bLabelLarge = TextStyle(
+  fontWeight: FontWeight.w700,
+  fontFamily: kFontFamily,
+  fontSize: fontSize20,
+  height: kLineHeight1_27,
+  color: darkBlue3,
+);
+
+final textFieldStyle = TextStyle(
+  fontWeight: FontWeight.w400,
+  fontFamily: kFontFamily,
+  fontSize: fontSize16,
+  height: kLineHeight1_21,
+  color: darkBlue3.withOpacity(0.4),
+);

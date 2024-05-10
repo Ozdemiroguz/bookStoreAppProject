@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:book_store/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,17 +29,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: EdgeInsets.only(
-        top: 20.h,
         left: 20.w,
         right: 20.w,
+        bottom: 0.h,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.r),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0xfff4f4ff),
+            offset: Offset(0, 1),
+          ),
+        ],
       ),
       child: AppBar(
+        //shadow with shape
+
         title: title != null
             ? Text(
                 title!,
                 overflow: TextOverflow.ellipsis,
+                style: bLabelLarge,
               )
             : null,
         leading: leading ??
@@ -50,11 +64,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       backgroundColor: Colors.transparent,
                       elevation: 0,
                     ),
-                    icon: Assets.icons.arrowLeft.svg(colorFilter: const ColorFilter.mode(darkBlue, BlendMode.srcIn)),
+                    icon: Assets.icons.arrowLeft.svg(
+                      colorFilter: const ColorFilter.mode(
+                        darkBlue,
+                        BlendMode.srcIn,
+                      ),
+                    ),
                   )
                 : null),
-        toolbarHeight: 44.h,
-        leadingWidth: 44.w,
         actions: actions,
         bottom: bottom,
       ),
@@ -62,5 +79,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kAppBarHeight + bottomHeight + 24.h);
+  Size get preferredSize =>
+      Size.fromHeight(kAppBarHeight + bottomHeight + 20.h);
 }
