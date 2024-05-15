@@ -17,6 +17,7 @@ class BooksState with _$BooksState {
     required List<int> categoryIds,
     required int selectedCategoryId,
     required String searchQuery,
+    required bool favorited,
   }) = _BooksState;
 
   factory BooksState.initial() => BooksState(
@@ -28,5 +29,6 @@ class BooksState with _$BooksState {
         categoryIds: [],
         selectedCategoryId: -1,
         searchQuery: '',
+        favorited: false,
       );
 }

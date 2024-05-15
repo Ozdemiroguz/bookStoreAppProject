@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:book_store/constants/colors.dart';
 import 'package:book_store/constants/text_styles.dart';
@@ -7,7 +9,9 @@ import 'package:book_store/features/home/domain/models/book_category.dart';
 import 'package:book_store/features/home/presentation/providers/books_providers.dart';
 import 'package:book_store/features/home/presentation/widgets/widgets.dart';
 import 'package:book_store/router/router.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -38,19 +42,10 @@ class CategoryPage extends HookConsumerWidget {
                                 element.id == booksState.selectedCategoryId,
                           )
                           .name,
-                  style: labelLarge.copyWith(
-                    color: Colors.black,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: bLabelLarge,
                 ),
               ],
-              onBackPressed: () {
-                context.router.pop();
-
-                ref.read(booksProviders.notifier).categoryFilterChanged(-1);
-                ref.read(booksProviders.notifier).searchFilterChanged('');
-              },
+              
             ),
             body: ScrollConfiguration(
               behavior:
@@ -60,11 +55,12 @@ class CategoryPage extends HookConsumerWidget {
                   padding: EdgeInsets.only(
                     left: 20.r,
                     right: 20.r,
-                    top: 40.r,
+                    top: 33.r,
                   ),
                   child: Column(
                     children: [
                       SearchFilterBar(),
+                       SizedBox(height: 40.h),
                       GridWidget(),
                     ],
                   ),
@@ -125,62 +121,92 @@ class BookWidget extends StatelessWidget {
         context.router.push(BookRoute(book: book));
       },
       child: Container(
+        padding: EdgeInsets.all(10.r),
         decoration: ShapeDecoration(
+          color: Color(0xfff4f4ff),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(4.r),
           ),
         ),
         child: Column(
           children: [
-            Image.network(
-              book.image!,
-              width: 170.w,
-              height: 225.h,
-              fit: BoxFit.contain,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    book.name,
-                    style: TextStyle(
-                      color: const Color(0xFF090937),
-                      fontSize: 10.sp,
-                      fontFamily: 'Manrope',
-                      fontWeight: FontWeight.w600,
+            Expanded(
+              child: Container(
+                
+                decoration: BoxDecoration(
+                  color:white ,
+                  borderRadius: BorderRadius.circular(4.r),
+                  boxShadow: [
+                    BoxShadow(
+                      color: purple.withOpacity(0.2),
+                      offset: const Offset(0, 4),
+                      blurRadius: 4.8,
+                    ),
+                  ],
+                  
+                  image: DecorationImage(
+                    //fotğrafa yakkınlaşma
+                    
+                    image: NetworkImage(book.image!
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                ),
+                
+                
+              
+              
+              
+              ),
+            ),
+            SizedBox(height: 10.h),
+           
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  overflow: TextOverflow.ellipsis,
+                  book.name,
+                  style: bLabelSmall.copyWith(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w600,
+                    
+                    
+                    
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                      
                       SizedBox(
-                        width: 50.w,
+                        width: 100.w,
                         child: Text(
-                          book.author,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: const Color(0x99090937),
+                          book.author,
+                          style: bLabelSmall.copyWith(
+                            color: darkBlue3.withOpacity(.6),
                             fontSize: 8.sp,
-                            fontFamily: 'Manrope',
-                            fontWeight: FontWeight.w600,
-                          ),
+                            fontWeight: FontWeight.w600,  
+                        
+                        ),
+                        
                         ),
                       ),
-                      Text(
+                    SizedBox(
+                      width: 50.w,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
                         "${book.price}\$",
-                        style: TextStyle(
-                          color: const Color(0xFF6251DD),
-                          fontSize: 12.sp,
-                          fontFamily: 'Manrope',
+                        style: bLabelSmall.copyWith(
+                          color: purple,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

@@ -28,13 +28,15 @@ final class HomeRepositoryImpl implements HomeRepository {
       (r) => r.data!.extract<List>('category').fold(
             () =>
                 left(const Failure.unknownError("Error extracting categories")),
-            (categories) => right(categories
-                .map(
-                  (category) =>
-                      BookCategoryDto.fromJson(category as Map<String, dynamic>)
-                          .toDomain(),
-                )
-                .toList()),
+            (categories) => right(
+              categories
+                  .map(
+                    (category) => BookCategoryDto.fromJson(
+                            category as Map<String, dynamic>)
+                        .toDomain(),
+                  )
+                  .toList(),
+            ),
           ),
     );
   }

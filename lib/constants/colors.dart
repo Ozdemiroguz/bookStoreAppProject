@@ -21,4 +21,4 @@ const dropdownShadowColor = Color.fromRGBO(0, 69, 113, .08);
 const softBack = Color.fromRGBO(244, 244, 255, 1);
 const orange = Color.fromRGBO(239, 107, 74, 1);
 const darkBlue3 = Color(0xF5090937);
-const purple = Color.fromRGBO(98, 81, 221, 1);
+const purple = Color.fromARGB(255, 98, 81, 221);

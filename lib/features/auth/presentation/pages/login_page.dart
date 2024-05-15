@@ -204,7 +204,6 @@ class LoginButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final formKey = ref.read(_keyProvider).currentState;
     final authNotifier = ref.watch(authNotifierProvider.notifier);
     return SizedBox(
       height: 60.r,

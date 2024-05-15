@@ -17,6 +17,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/Alert.svg
   SvgGenImage get alert => const SvgGenImage('assets/icons/Alert.svg');
 
+  /// File path: assets/icons/Arrow.svg
+  SvgGenImage get arrow => const SvgGenImage('assets/icons/Arrow.svg');
+
   /// File path: assets/icons/ArrowLeft.svg
   SvgGenImage get arrowLeft => const SvgGenImage('assets/icons/ArrowLeft.svg');
 
@@ -31,6 +34,9 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/Filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/Filter.svg');
+
+  /// File path: assets/icons/HEART.svg
+  SvgGenImage get heart => const SvgGenImage('assets/icons/HEART.svg');
 
   /// File path: assets/icons/Logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/Logo.svg');
@@ -54,11 +60,13 @@ class $AssetsIconsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         alert,
+        arrow,
         arrowLeft,
         eyeOff,
         eyeOn,
         failure,
         filter,
+        heart,
         logo,
         pitonLogo,
         pitonLogoWhite,

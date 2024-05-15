@@ -24,6 +24,7 @@ mixin _$BooksState {
   List<int> get categoryIds => throw _privateConstructorUsedError;
   int get selectedCategoryId => throw _privateConstructorUsedError;
   String get searchQuery => throw _privateConstructorUsedError;
+  bool get favorited => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BooksStateCopyWith<BooksState> get copyWith =>
@@ -44,7 +45,8 @@ abstract class $BooksStateCopyWith<$Res> {
       List<BookCategory> bookCategories,
       List<int> categoryIds,
       int selectedCategoryId,
-      String searchQuery});
+      String searchQuery,
+      bool favorited});
 }
 
 /// @nodoc
@@ -68,6 +70,7 @@ class _$BooksStateCopyWithImpl<$Res, $Val extends BooksState>
     Object? categoryIds = null,
     Object? selectedCategoryId = null,
     Object? searchQuery = null,
+    Object? favorited = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -102,6 +105,10 @@ class _$BooksStateCopyWithImpl<$Res, $Val extends BooksState>
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String,
+      favorited: null == favorited
+          ? _value.favorited
+          : favorited // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -122,7 +129,8 @@ abstract class _$$BooksStateImplCopyWith<$Res>
       List<BookCategory> bookCategories,
       List<int> categoryIds,
       int selectedCategoryId,
-      String searchQuery});
+      String searchQuery,
+      bool favorited});
 }
 
 /// @nodoc
@@ -144,6 +152,7 @@ class __$$BooksStateImplCopyWithImpl<$Res>
     Object? categoryIds = null,
     Object? selectedCategoryId = null,
     Object? searchQuery = null,
+    Object? favorited = null,
   }) {
     return _then(_$BooksStateImpl(
       isLoading: null == isLoading
@@ -178,6 +187,10 @@ class __$$BooksStateImplCopyWithImpl<$Res>
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
               as String,
+      favorited: null == favorited
+          ? _value.favorited
+          : favorited // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -193,7 +206,8 @@ class _$BooksStateImpl implements _BooksState {
       required final List<BookCategory> bookCategories,
       required final List<int> categoryIds,
       required this.selectedCategoryId,
-      required this.searchQuery})
+      required this.searchQuery,
+      required this.favorited})
       : _books = books,
         _filteredBooks = filteredBooks,
         _failures = failures,
@@ -246,10 +260,12 @@ class _$BooksStateImpl implements _BooksState {
   final int selectedCategoryId;
   @override
   final String searchQuery;
+  @override
+  final bool favorited;
 
   @override
   String toString() {
-    return 'BooksState(isLoading: $isLoading, books: $books, filteredBooks: $filteredBooks, failures: $failures, bookCategories: $bookCategories, categoryIds: $categoryIds, selectedCategoryId: $selectedCategoryId, searchQuery: $searchQuery)';
+    return 'BooksState(isLoading: $isLoading, books: $books, filteredBooks: $filteredBooks, failures: $failures, bookCategories: $bookCategories, categoryIds: $categoryIds, selectedCategoryId: $selectedCategoryId, searchQuery: $searchQuery, favorited: $favorited)';
   }
 
   @override
@@ -270,7 +286,9 @@ class _$BooksStateImpl implements _BooksState {
             (identical(other.selectedCategoryId, selectedCategoryId) ||
                 other.selectedCategoryId == selectedCategoryId) &&
             (identical(other.searchQuery, searchQuery) ||
-                other.searchQuery == searchQuery));
+                other.searchQuery == searchQuery) &&
+            (identical(other.favorited, favorited) ||
+                other.favorited == favorited));
   }
 
   @override
@@ -283,7 +301,8 @@ class _$BooksStateImpl implements _BooksState {
       const DeepCollectionEquality().hash(_bookCategories),
       const DeepCollectionEquality().hash(_categoryIds),
       selectedCategoryId,
-      searchQuery);
+      searchQuery,
+      favorited);
 
   @JsonKey(ignore: true)
   @override
@@ -301,7 +320,8 @@ abstract class _BooksState implements BooksState {
       required final List<BookCategory> bookCategories,
       required final List<int> categoryIds,
       required final int selectedCategoryId,
-      required final String searchQuery}) = _$BooksStateImpl;
+      required final String searchQuery,
+      required final bool favorited}) = _$BooksStateImpl;
 
   @override
   bool get isLoading;
@@ -319,6 +339,8 @@ abstract class _BooksState implements BooksState {
   int get selectedCategoryId;
   @override
   String get searchQuery;
+  @override
+  bool get favorited;
   @override
   @JsonKey(ignore: true)
   _$$BooksStateImplCopyWith<_$BooksStateImpl> get copyWith =>

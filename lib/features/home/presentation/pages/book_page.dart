@@ -1,10 +1,13 @@
 import 'package:auto_route/annotations.dart';
+import 'package:book_store/common/backgrounded_icon.dart';
 import 'package:book_store/constants/colors.dart';
 import 'package:book_store/constants/text_styles.dart';
 import 'package:book_store/core/extensions/context_extensions.dart';
 import 'package:book_store/custom/custom_app_bar.dart';
 import 'package:book_store/custom/custom_filled_button.dart';
 import 'package:book_store/features/home/domain/models/book.dart';
+import 'package:book_store/features/home/presentation/providers/books_providers.dart';
+import 'package:book_store/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -23,48 +26,61 @@ class BookPage extends HookConsumerWidget {
         actions: [
           Text(
             "BookDetails",
-            style: labelLarge.copyWith(
-              color: Colors.black,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
+            style: bLabelLarge
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: 20.r,
-          right: 20.r,
-          top: 20.r,
-          bottom: 40.r,
-        ),
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ImagePart(book: book),
-                SummaryPart(book: book),
-                const Spacer(),
-                ButtonPart(
-                  book: book,
-                ),
-              ],
-            ),
-            Positioned(
-              right: 0,
-              child: GestureDetector(
-                onTap: () {},
-                child: Icon(
-                  Icons.favorite_border,
-                  color: purple,
-                  size: 30.r,
-                ),
+      body:  Container(
+              padding: EdgeInsets.only(
+                left: 20.r,
+                right: 20.r,
+                top: 33.r,
+                bottom: 40.r,
+              ),
+              child: Stack(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ImagePart(book: book),
+                      SummaryPart(book: book),
+                      const Spacer(),
+                      ButtonPart(
+                        book: book,
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    right: 0,
+                    child: SizedBox(
+                      width: 44.w,
+                      height:44.h,
+                      child: FloatingActionButton(
+                        
+                        onPressed: () {
+                          ref.read(booksProviders.notifier).favoriteBookChanged();
+                          print("favorited: ${ref.watch(booksProviders).favorited}");
+                        },
+                        backgroundColor: Color(0xfff4f4f4),
+                        child:Assets.icons.heart.svg(
+                          colorFilter: ref.watch(booksProviders).favorited
+                              ? const ColorFilter.mode(
+                                red,
+                                  BlendMode.srcIn,
+                                )
+                              : null,
+            
+                        )
+            
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+                  
+         
+      
     );
   }
 }
@@ -85,16 +101,17 @@ class ImagePart extends StatelessWidget {
               width: 150.r,
               height: 225.r,
               decoration: BoxDecoration(
+                color: white,
                 borderRadius: BorderRadius.circular(4.r),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 1,
-                    blurRadius: 5,
-                    offset: const Offset(0, 1), // changes position of shadow
+                    color: purple.withOpacity(0.2),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4), // changes position of shadow
                   ),
                 ],
                 image: DecorationImage(
+
                   fit: BoxFit.cover,
                   image: NetworkImage(
                     book.image!,
@@ -104,21 +121,18 @@ class ImagePart extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: 20.h),
         Column(
           children: [
             Text(
               book.name,
-              style: titleLarge.copyWith(
-                color: Colors.black,
-                height: 2.7.w,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w700,
-              ),
+              style: bLabelLarge
             ),
+            SizedBox(height: 10.h),
             Text(
               book.author,
               style: bodyMedium.copyWith(
-                color: Colors.grey,
+                color: darkBlue3.withOpacity(0.6),
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
               ),
@@ -144,9 +158,9 @@ class SummaryPart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Sumary',
+            'Summary',
             style: titleLarge.copyWith(
-              color: Colors.black,
+              color:darkBlue3,
               height: 2.7.w,
               fontSize: 20.sp,
               fontWeight: FontWeight.w700,
@@ -157,9 +171,9 @@ class SummaryPart extends StatelessWidget {
             child: SingleChildScrollView(
               child: Text(
                 style: labelSmall.copyWith(
-                  color: Colors.grey,
+                  color: darkBlue3.withOpacity(0.6),
                   fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                 ),
                 book.description,
               ),
@@ -182,7 +196,7 @@ class ButtonPart extends StatelessWidget {
       child: CustomFilledButton.orange(
         onPressed: () {},
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "${book.price}\$",

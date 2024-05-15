@@ -34,6 +34,8 @@ class BackgroundedIcon extends StatelessWidget {
             height: iconSize ?? 32.r,
             width: iconSize ?? 32.r,
             colorFilter: iconColor != null ? ColorFilter.mode(iconColor!, BlendMode.srcIn) : null,
+            
+
           ),
         ],
       ),

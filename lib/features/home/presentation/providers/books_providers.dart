@@ -178,5 +178,14 @@ final class _BooksNotifier extends Notifier<BooksState> {
       searchQuery: search,
       categoryIds: categoryIds,
     );
+
+
   }
+  void favoriteBookChanged() {
+    state = state.copyWith(favorited: !state.favorited);
+
+    }
+
+    
+  
 }

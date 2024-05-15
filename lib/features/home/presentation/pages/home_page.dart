@@ -9,7 +9,6 @@ import 'package:book_store/features/home/presentation/widgets/widgets.dart';
 import 'package:book_store/gen/assets.gen.dart';
 import 'package:book_store/router/router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,15 +22,15 @@ class HomePage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        actions: [
-          Text(
-            "Catalog",
-            style: bLabelLarge,
-          ),
-        ],
+        toolbarHeight: 32.h,
         leading: SizedBox(
-          child: Assets.icons.logo.svg(height: 32.h, width: 32.w),
+          width: 50.w,
+          height: 32.h,
+          child: Assets.icons.logo.svg(),
         ),
+        actions: [Text("Catalog"
+        ,style:bLabelLarge,)],
+        
       ),
       body: booksState.isLoading
           ? const Center(
@@ -52,30 +51,35 @@ class HomePage extends HookConsumerWidget {
                       padding: EdgeInsets.only(
                         left: 20.r,
                       ),
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CategoryBar(),
-                            SearchFilterBar(),
-                            SingleChildScrollView(
-                              child: Column(
-                                children: booksState.categoryIds.isEmpty
-                                    ? [
-                                        const Center(
-                                            child: Text("No books found"))
-                                      ]
-                                    : booksState.categoryIds
-                                        .map((e) => CategoryBooksWidget(
-                                            bookCategory: booksState
-                                                .bookCategories
-                                                .firstWhere((element) =>
-                                                    element.id == e)))
-                                        .toList(),
-                              ),
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                         
+                                CategoryBar(),
+                                SearchFilterBar(),
+                                SingleChildScrollView(
+                                  child: Column(
+                                    children: booksState.categoryIds.isEmpty
+                                        ? [
+                                            const Center(
+                                                child: Text("No books found"))
+                                          ]
+                                        : booksState.categoryIds
+                                            .map((e) => CategoryBooksWidget(
+                                                bookCategory: booksState
+                                                    .bookCategories
+                                                    .firstWhere((element) =>
+                                                        element.id == e)))
+                                            .toList(),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -262,7 +266,7 @@ class BookDetails extends ConsumerWidget {
                 width: 80.w,
                 height: 120.h,
                 decoration: BoxDecoration(
-                  color: red,
+                  color: white,
                   borderRadius: BorderRadius.circular(4.r),
                   boxShadow: [
                     BoxShadow(
@@ -282,6 +286,7 @@ class BookDetails extends ConsumerWidget {
               ),
             Container(
               padding: EdgeInsets.only(
+                left: 10.w,
                 top: 10.h,
                 bottom: 10.h,
               ),
@@ -320,6 +325,25 @@ class BookDetails extends ConsumerWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class MyCustomAppBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+          height: constraints
+              .maxHeight, // AppBar'ın yüksekliğini dinamik olarak ayarlayın
+          padding:
+              EdgeInsets.only(top: 20.0), // Üstten 20 piksel boşluk ekleyin
+          child: Center(
+            child: Text('Başlık'),
+          ),
+        );
+      },
     );
   }
 }

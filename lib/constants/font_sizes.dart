@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 const kFontFamily = "Manrope";
 
 const kLineHeight1_0 = 1.0;
+const kLineHeight1_1 = 1.136;
 const kLineHeight1_16 = 1.16;
 const kLineHeight1_21 = 1.21;
 const kLineHeight1_416 = 1.416;
